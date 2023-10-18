@@ -1,20 +1,19 @@
 version: '3'
 
 networks:
-  nginx-php-mysql-playground:                             # The name of the netwrok eg
+  nginx-php-mysql-playground:                             # The name of the netwrok
 
 services:
 
   #nginx:
   playground-nginx-service:                               # The name of the nginx service
-    image: nginx
+    image: nginx:stable-alpine
     container_name: playground-nginx-container            # The name of the nginx container
     volumes:
     - ./app:/var/www/project/                             # Maps the containers drive to the directory for persistence
     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf # Maps the default.conf file to the nginx directory # REQUIRED change the php service name in default.conf file
     ports:
-      - "8080:80"                                         # The ports you want to expose                                 
-      - "443:443"
+      - "80:80"                                         # The ports you want to expose                                 
     depends_on:
       - playground-php82-service                           # The name of the php service
     networks:
