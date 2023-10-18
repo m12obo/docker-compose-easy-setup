@@ -1,7 +1,7 @@
 
 # docker-compose-easy-setup
 
-My docker-compose.yml file to easly setup a development environment.
+My docker-compose.yml file to easily setup a development environment.
 
 this will create a docker container running the following
 
@@ -23,46 +23,36 @@ Create an empty directory with the name of your project.
 
 Navigate to this directory in Visual Studio Code.
 
-Open a terminal in Visual studio Code and clone this repo:
+Open a terminal in Visual studio Code and clone this repo: (including the . at the end)
 
 ```bash
 git clone https://github.com/m12obo/docker-compose-easy-setup.git .
 ```
-
-edit the docker-compose.yml file \
-replace the items in the {{  }} with the required names  NOTE: remove the {{ }} too eg.
-
-```bash
-  {{ network name }}:   # The name of the netwrok eg: nginx-php-mysql-playground
-```
-
-edit the default.conf file in the nginx directory \
-replace the items in the {{  }} with the required names  NOTE: remove the {{ }} too eg.
+then in the mysql folder delete the PLACEHOLDER_DELETE_ME\
+this step is important as the mysql dir needs to be empty
 
 ```bash
-  {{ the-name-of-the-php-service }}:9000 # The name in the docker-compose.yml 
-  eg. playground-php82-service:9000;
+DID YOU DELETE THE PLACEHOLDER_DELETE_ME?
 ```
-
-then run 
+now run 
 
 ```bash
 docker-compose up -d
 ```
 
+wait for the containers to start and make sure the mysql folder is now populated\
 once the container has started visit 
 
 ```bash
 http:\\localhost:8080\index.php
 ```
-and you should see the weclome page
+and you should see the welcome page
 
 and 
 
 ```bash
 http:\\localhost:8001
 ```
-
 will show the phpmyadmin login page
 
 

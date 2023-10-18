@@ -1,14 +1,14 @@
 version: '3'
 
 networks:
-  {{ network name }}:                                     # The name of the netwrok eg: nginx-php-mysql-playground
+  nginx-php-mysql-playground:                             # The name of the netwrok eg
 
 services:
 
   #nginx:
-  {{ service-name }}:                                     # The name of the service eg playground-nginx-service
+  playground-nginx-service:                               # The name of the nginx service
     image: nginx
-    container_name: {{ container-name }}                  # The name of the container eg: playground-nginx-container
+    container_name: playground-nginx-container            # The name of the nginx container
     volumes:
     - ./app:/var/www/project/                             # Maps the containers drive to the directory for persistence
     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf # Maps the default.conf file to the nginx directory # REQUIRED change the php service name in default.conf file
@@ -16,49 +16,49 @@ services:
       - "8080:80"                                         # The ports you want to expose                                 
       - "443:443"
     depends_on:
-      - {{ php-service-name }}                            # The name of the php service eg: playground-php82-service
+      - playground-php82-service                           # The name of the php service
     networks:
-      - {{ network name }}:                               # The name of the netwrok as above eg: nginx-php-mysql-playground
+      - nginx-php-mysql-playground                        # The name of the netwrok as above 
 
   #php: 
-  {{ service-name }}:                                     # The name of the service eg playground-php82-service
+  playground-php82-service:                               # The name of the service
     build:
       context: .
       dockerfile: ./php/Dockerfile                        # The Dockerfile required for setting up composer        
-    container_name: {{ container-name }}                  # The name of the container eg: playground-php82-container
+    container_name: playground-php82-container            # The name of the container
     ports:
       - "9000:9000"                                       # The default php port : same port in the nginx default.conf file
     volumes:
       - ./app:/var/www/project                            # Maps the containers drive to the directory for persistence
     networks:
-      - {{ network name }}:                               # The name of the netwrok as above eg: nginx-php-mysql-playground
+      - nginx-php-mysql-playground                        # The name of the netwrok as above
 
   # mysql
-  {{ service-name }}:                                     # The name of the service eg playground-mysql8-service
+  playground-mysql8-service:                              # The name of the service
       image: mysql:8
-      container_name: {{ container-name }}                # The name of the container eg: playground-mysql8-container
+      container_name: playground-mysql8-container         # The name of the container
       ports:
-          - "3306:3306"                                   # the default mysql port
+          - "3306:3306"                                   # The default mysql port
       volumes:
           - ./mysql:/var/lib/mysql                        # Maps the containers drive to the directory for persistence
       command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-      restart: always                                     # always restart unless stopped manually
+      restart: always                                     # Always restart unless stopped manually
       environment:
-          MYSQL_DATABASE: {{ database-name }}             # The name of the database 
-          MYSQL_USER: {{ username }}                      # database username
-          MYSQL_PASSWORD: {{ password }}                  # the password of the user
-          MYSQL_ROOT_PASSWORD: {{ root-password }}        # the password of the root user
+          MYSQL_DATABASE: playground-database             # The name of the database 
+          MYSQL_USER: admin                               # The database username
+          MYSQL_PASSWORD: secret                          # The password of the user
+          MYSQL_ROOT_PASSWORD: secret                     # The password of the root user
       networks:
-          - {{ network name }}:                           # The name of the netwrok as above eg: nginx-php-mysql-playground
+          - nginx-php-mysql-playground                    # The name of the netwrok as above eg: 
 
   #phpmyadmin
-  {{ service-name }}:                                     # The name of the service eg playground-phpmyadmin-service
+  playground-phpmyadmin-service:                          # The name of the service
     image: phpmyadmin/phpmyadmin
-    container_name: {{ container-name }}                  # The name of the container eg: playground-phpmyadmin-container
+    container_name: playground-phpmyadmin-container       # The name of the container eg: 
     ports:
-      - "8001:80"                                         # the phpmyadmin port
+      - "8001:80"                                         # The phpmyadmin port
     environment:
-      - PMA_HOST={{ service-name }}:                      # The name of the mysql service eg playground-mysql8-service
+      - PMA_HOST=playground-mysql8-service                # The name of the mysql service eg 
       - PMA_PORT=3306                                     # the default mysql port
     networks:
-          - {{ network name }}:                           # The name of the netwrok as above eg: nginx-php-mysql-playground
+          - nginx-php-mysql-playground                    # The name of the netwrok as above eg: 
