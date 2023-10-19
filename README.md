@@ -8,7 +8,7 @@ this will create a docker container running the following
 Nginx \
 php8.2 - this has composer installed \
 mysql8 \
-phpmyadmin \
+phpMyAdmin \
 babylon.js
 
 ## Installation
@@ -44,16 +44,16 @@ wait for the containers to start and make sure the mysql folder is now populated
 once the container has started visit 
 
 ```bash
-http:\\localhost:8080\index.php
+http://localhost/index.php
 ```
 and you should see the welcome page
 
 and 
 
 ```bash
-http:\\localhost:8001
+http://localhost:8001/index.php
 ```
-will show the phpmyadmin login page
+will show the phpMyAdmin login page
 
 
 
