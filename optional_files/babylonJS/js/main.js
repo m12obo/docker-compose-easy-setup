@@ -15,6 +15,9 @@ import  "https://cdn.babylonjs.com/serializers/babylonjs.serializers.min.js";
 import  "https://cdn.babylonjs.com/gui/babylon.gui.min.js";
 import  "https://cdn.babylonjs.com/inspector/babylon.inspector.bundle.js";
 
+// this allows vscode to have auto completion
+/// <reference path='babylon.d.ts' />           
+
 const canvas = document.getElementById('renderCanvas');   // create a canvas where the magic is going to happen
 
 const engine = new BABYLON.Engine(canvas);   // add the engine needed 
