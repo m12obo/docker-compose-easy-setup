@@ -109,11 +109,67 @@ to install php/unit use
 composer require --dev phpunit/phpunit
 ```
 
+to install doctrine use
+
+```bash 
+composer require doctrine
+```
+ update the database entries in the .env file with mySQL information in the\
+ docker-compose.yml file
+
+ to add PHP coding standards use [PHP fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer)
+
+ ```bash
+ composer require --dev friendsofphp/php-cs-fixer
+ ```
+
 to leave the shell type 
 
 ```bash
 exit
 ```
+
+# React
+
+NOTE: React we will need a few more dependencies
+
+Webpack-Encore\
+Yarn
+
+to install webpack-encore use
+
+```bash
+composer require symfony/webpack-encore-bundle
+```
+
+the type
+
+```bash
+exit
+```
+
+to install yarn use
+
+```bash 
+docker-compose run --rm playground-node-service yarn install
+```
+
+then
+
+```bash
+docker-compose run --rm playground-node-service yarn dev
+```
+
+will compile the JS and CSS files 
+
+then
+
+```bash
+docker-compose run --rm playground-node-service yarn add react react-dom --dev
+```
+
+All dependencies will now be installed
+
 
 # installing babylon.js
 
@@ -131,16 +187,3 @@ and you should see an awesome animated Yeti
 # Notes
 
 This setup is for what I use and was created to help me create a development environment quickly and easily I hope it helps you to.
-
-
-
-
-
-
-
-
-
-
-
-
-    

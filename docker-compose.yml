@@ -1,7 +1,7 @@
 version: '3'
 
 networks:
-  nginx-php-mysql-playground:                             # The name of the netwrok
+  nginx-php-mysql-node-playground:                             # The name of the netwrok
 
 services:
 
@@ -17,7 +17,7 @@ services:
     depends_on:
       - playground-php82-service                          # The name of the php service
     networks:
-      - nginx-php-mysql-playground                        # The name of the netwrok as above 
+      - nginx-php-mysql-node-playground                   # The name of the netwrok as above 
 
   #php: 
   playground-php82-service:                               # The name of the service
@@ -30,7 +30,7 @@ services:
     volumes:
       - ./app:/var/www/project                            # Maps the containers drive to the directory for persistence
     networks:
-      - nginx-php-mysql-playground                        # The name of the netwrok as above
+      - nginx-php-mysql-node-playground                   # The name of the netwrok as above
 
   # mysql
   playground-mysql8-service:                              # The name of the service
@@ -48,16 +48,27 @@ services:
           MYSQL_PASSWORD: secret                          # The password of the user
           MYSQL_ROOT_PASSWORD: secret                     # The password of the root user
       networks:
-          - nginx-php-mysql-playground                    # The name of the netwrok as above eg: 
+          - nginx-php-mysql-node-playground               # The name of the netwrok as above eg: 
 
   #phpmyadmin
   playground-phpmyadmin-service:                          # The name of the service
     image: phpmyadmin/phpmyadmin
-    container_name: playground-phpmyadmin-container       # The name of the container eg: 
+    container_name: playground-phpmyadmin-container       # The name of the container
     ports:
       - "8001:80"                                         # The phpmyadmin port
     environment:
       - PMA_HOST=playground-mysql8-service                # The name of the mysql service eg 
-      - PMA_PORT=3306                                     # the default mysql port
+      - PMA_PORT=3306                                     # The default mysql port
     networks:
-          - nginx-php-mysql-playground                    # The name of the netwrok as above eg: 
+          - nginx-php-mysql-node-playground               # The name of the netwrok as above eg: 
+
+
+  # node
+  playground-node-service:                                # The name of the service
+      image: node:latest
+      container_name: playground-node-container           # the name of the container
+      volumes:
+          - ./app:/var/www/project                        # Maps the containers drive to the directory for persistence
+      working_dir: /var/www/project                       # Maps the containers working directory
+      networks:
+          - nginx-php-mysql-node-playground               # The name of the netwrok as above eg:
