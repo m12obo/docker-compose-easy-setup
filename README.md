@@ -123,12 +123,6 @@ composer require doctrine
  composer require --dev friendsofphp/php-cs-fixer
  ```
 
-to leave the shell type 
-
-```bash
-exit
-```
-
 # React
 
 NOTE: React we will need a few more dependencies
@@ -168,12 +162,53 @@ then
 docker-compose run --rm playground-node-service yarn add react react-dom --dev
 ```
 
+finally 
+
+```bash
+docker-compose run --rm playground-node-service yarn add @babel/preset-react@^7.0.0 --dev
+```
+
 All dependencies will now be installed
+
+then update the webpack.config.js file and uncomment 
+
+```bash
+// uncomment if you use React
+// .enableReactPreset()
+```
+
+and add the below code to the bottom of the file just above
+'module.exports = Encore.getWebpackConfig();'
+
+```bash
+Encore.configureWatchOptions(watchOptions => {
+    watchOptions.poll = 250; // check for changes every 250 milliseconds
+});
+```
+
+then use 
+
+```bash
+docker-compose run --rm playground-node-service yarn run encore dev --watch
+```
+
+this will then run in the background compiling webpack when you make changes.
 
 
 # installing babylon.js
 
 Note: this is just my way and other ways may be better
+
+
+```bash
+docker-compose run --rm playground-node-service npm install --save-dev @babylonjs/core
+```
+
+then
+
+```bash
+docker-compose run --rm playground-node-service npm install --save-dev @babylonjs/inspector
+```
 
 inside the optional files folder move the babylonJS folder to the public folder then visit
 
@@ -182,6 +217,15 @@ http://localhost/babylonJS/index.html
 ```
 
 and you should see an awesome animated Yeti
+
+# installing three.js
+
+Note: this is just my way and other ways may be better
+
+
+```bash
+docker-compose run --rm playground-node-service npm install --save three
+```
 
 
 # Notes
