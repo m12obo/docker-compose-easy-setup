@@ -128,6 +128,7 @@ composer require doctrine
 NOTE: React we will need a few more dependencies
 
 Webpack-Encore\
+Symfony UX React\
 Yarn
 
 to install webpack-encore use
@@ -136,64 +137,33 @@ to install webpack-encore use
 composer require symfony/webpack-encore-bundle
 ```
 
+then to install symfony/ux-react use
+
+```bash
+composer require symfony/ux-react
+```
+
 the type
 
 ```bash
 exit
 ```
 
-to install yarn use
+add react helpers using 
 
 ```bash 
-docker-compose run --rm playground-node-service yarn
+docker-compose run --rm playground-node-service yarn add @babel/preset-react --dev --force
 ```
 
 then
 
 ```bash
-docker-compose run --rm playground-node-service yarn run encore dev
+docker-compose run --rm playground-node-service yarn watch
 ```
 
-will compile the JS and CSS files 
+this will watch for changes in the assets/react/controllers/ folder and compile the JSX files.
 
-then
-
-```bash
-docker-compose run --rm playground-node-service yarn add react react-dom --dev
-```
-
-finally 
-
-```bash
-docker-compose run --rm playground-node-service yarn add @babel/preset-react@^7.0.0 --dev
-```
-
-All dependencies will now be installed
-
-then update the webpack.config.js file and uncomment 
-
-```bash
-// uncomment if you use React
-// .enableReactPreset()
-```
-
-and add the below code to the bottom of the file just above
-'module.exports = Encore.getWebpackConfig();'
-
-```bash
-Encore.configureWatchOptions(watchOptions => {
-    watchOptions.poll = 250; // check for changes every 250 milliseconds
-});
-```
-
-then use 
-
-```bash
-docker-compose run --rm playground-node-service yarn run encore dev --watch
-```
-
-this will then run in the background compiling webpack when you make changes.
-
+All dependencies will now be installed.
 
 # installing babylon.js
 
