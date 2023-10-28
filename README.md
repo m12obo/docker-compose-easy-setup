@@ -145,13 +145,13 @@ exit
 to install yarn use
 
 ```bash 
-docker-compose run --rm playground-node-service yarn install
+docker-compose run --rm playground-node-service yarn
 ```
 
 then
 
 ```bash
-docker-compose run --rm playground-node-service yarn dev
+docker-compose run --rm playground-node-service yarn run encore dev
 ```
 
 will compile the JS and CSS files 
